@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Nova Quadra</title>
+    
+    <style>
+        /* Fundo da página */
+        body {
+            background: linear-gradient(90deg, #f0e68c, #e74c3c);
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Formulário responsivo */
+        .form-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Título e subtítulo */
+        h2 {
+            font-size: 26px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Rótulos centralizados */
+        label {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Campos do formulário */
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        /* Mensagem de erro */
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Grupo de botões */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .button-group .divider {
+            font-size: 14px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .btn {
+            width: 66%; 
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        /* Botão Cadastrar  */
+        .btn-success {
+            background-color: #09090a;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #f56346;
+        }
+
+        /* Botão Cancelar Vazado*/
+        .btn-secondary {
+            background-color: transparent;
+            /* border: 2px solid #09090a; */ /* Borda preta */
+            color: #09090a;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f56346;;
+            color: #fff;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Exibir mensagens de erro -->
+        {% if messages %}
+            {% for message in messages %}
+                {% if 'error' in message.tags %}
+                    <div class="alert-danger">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <!-- Título e subtítulo -->
+        <h2>Adicionar Nova Quadra</h2>
+        <p>Preencha os dados abaixo para cadastrar uma nova quadra</p>
+
+        <!-- Formulário -->
+        <form method="POST">
+            {% csrf_token %}
+            <label for="id_nome">Nome da quadra</label>
+            <input type="text" id="id_nome" name="nome" placeholder="Digite o nome da quadra" required>
+
+            <label for="id_endereco">Localidade</label>
+            <textarea id="id_endereco" name="endereco" placeholder="Informe o endereço no formato: Logradouro, Endereço, Bairro, Cidade, Estado" rows="2" required></textarea>
+
+            <label for="id_estrutura_fisica">Estrutura física da quadra</label>
+            <textarea id="id_estrutura_fisica" name="estrutura_fisica" placeholder="Descreva a estrutura física da quadra" rows="3"></textarea>
+
+            <label for="id_informacoes_jogos">Informações sobre os jogos</label>
+            <textarea id="id_informacoes_jogos" name="informacoes_jogos" placeholder="Informe os dias e horários dos jogos" rows="3"></textarea>
+
+            <!-- Botões "Cadastrar" e "Cancelar" -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+                <div class="divider">ou</div>
+                <a href="/" class="btn btn-secondary">Voltar ao Início</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

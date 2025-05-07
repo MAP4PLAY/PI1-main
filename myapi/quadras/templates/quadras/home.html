@@ -1,0 +1,57 @@
+{% extends "quadras/base.html" %}
+
+{% block content %}  
+
+    <!-- Cabeçalho -->
+    <div class="header">
+        <a href="{% url 'adicionar_quadra' %}" class="btn btn-light cadastrar-btn me-1">Adicionar Quadras</a>
+    </div>
+
+<header class="hero">
+    <h1>Map4Play - O mapa certo para o seu jogo!</h1>   
+    <h4>Encontre quadras públicas de basquete em São Paulo</h4>
+    
+</header>
+
+<!-- Barra de Pesquisa -->
+<div class="container search-bar">
+    <form method="GET" action="{% url "home" %}">
+        <div class="input-group" style="width: 100%;">
+            <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Digite nome da quadra, bairro, cidade ou parte do endereço">
+            <button class="btn btn-dark me-1" type="submit">
+                <i class="bi bi-search"></i> <!-- Ícone de lupa -->
+                Pesquisar
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Lista de Quadras -->
+<div class="container mt-5">
+    <h2>Quadras</h2>
+    <!-- Verifica se existem quadras -->
+     {% if quadras %}
+        <div class="row">
+            {% for quadra in quadras %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            {{ quadra.nome }}
+                        </div>
+                        <div class="card-body">
+                            {{ quadra.endereco }}
+                            <br>
+                            <a href="#" class="btn btn-dark mt-5">Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nenhuma quadra encontrada. Tente outra busca.</p>
+    {% endif %}
+</div>
+
+
+    
+{% endblock %}
